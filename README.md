@@ -1,7 +1,7 @@
 ## How to install
 
 1. After cloning run composer install
-2. Rename .env.example to .env and fille the database credentials
+2. Rename .env.example to .env and fill the database credentials
 3. Run php artisan test
 4. Run php artisan serve
 
