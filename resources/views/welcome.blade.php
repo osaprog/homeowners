@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Import CSV</title>@vite('resources/css/app.css')
+    <title>Import CSV</title>
 </head>
 <body>
 <div class="container  mt-5 mb-5">
