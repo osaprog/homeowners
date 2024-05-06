@@ -2,8 +2,8 @@
 
 1. After cloning run composer install
 2. Rename .env.example to .env and fill the database credentials
-3. Run php artisan migrate
-4. Run php artisan test
+3. Run php artisan test (optional)
+4. Run php artisan migrate
 5. Run php artisan serve
 
 
