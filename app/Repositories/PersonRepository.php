@@ -11,16 +11,16 @@ use Throwable;
 
 class PersonRepository implements PersonRepositoryInterface
 {
-    public function store(array $data): bool
+    public function store(array $request): bool
     {
         DB::beginTransaction();
 
         try {
             Person::create([
-                'title' => $data['title'],
-                'firstname' =>  $data['firstname'] ?? null,
-                'lastname' =>  $data['lastname'],
-                'initial' =>  $data['initial'] ?? null,
+                'title' => $request['title'],
+                'firstname' =>  $request['firstname'] ?? null,
+                'lastname' =>  $request['lastname'],
+                'initial' =>  $request['initial'] ?? null,
             ]);
 
             DB::commit();

@@ -4,10 +4,7 @@ namespace Tests\Feature;
 
 use App\Http\Controllers\PersonsController;
 use App\Repositories\PersonRepository;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Mockery\Mock;
-use App\Repositories\PersonRepositoryInterface;
+use App\Services\ImportService;
 use Tests\TestCase;
 use Mockery;
 class PersonsControllerTest extends TestCase
@@ -19,13 +16,13 @@ class PersonsControllerTest extends TestCase
     {
         $mockPersonRepository = Mockery::mock(PersonRepository::class);
         $mockPersonRepository->shouldReceive('store')->andReturn('Person stored successfully'); // Define expected behavior
-        $personsController = new PersonsController($mockPersonRepository);
+        $personsController = new PersonsController($mockPersonRepository, new ImportService());
         $csvContents =
             [
                 'homeowner',
                 'Mr and Mrs Smith',
             ];
-        $result = $personsController->processImport($csvContents);
+        $result = $personsController->importService->processImport($csvContents);
         $this->assertEquals( [
           ['title' => 'Mr', 'lastname' => 'Smith'],
           ['title' => 'Mrs', 'lastname' => 'Smith']
@@ -37,13 +34,13 @@ class PersonsControllerTest extends TestCase
     {
         $mockPersonRepository = Mockery::mock(PersonRepository::class);
         $mockPersonRepository->shouldReceive('store')->andReturn('Person stored successfully'); // Define expected behavior
-        $personsController = new PersonsController($mockPersonRepository);
+        $personsController = new PersonsController($mockPersonRepository, new ImportService());
         $csvContents =
             [
                 'homeowner',
                 'Mr Right',
             ];
-        $result = $personsController->processImport($csvContents);
+        $result = $personsController->importService->processImport($csvContents);
         $this->assertEquals( [
                 ['title' => 'Mr', 'lastname' => 'Right'],
             ]
@@ -54,14 +51,14 @@ class PersonsControllerTest extends TestCase
     {
         $mockPersonRepository = Mockery::mock(PersonRepository::class);
         $mockPersonRepository->shouldReceive('store')->andReturn('Person stored successfully'); // Define expected behavior
-        $personsController = new PersonsController($mockPersonRepository);
+        $personsController = new PersonsController($mockPersonRepository, new ImportService());
         $csvContents =
             [
                 'homeowner',
                 'Mr Right and Mrs Right',
                 'Mr Perfect',
             ];
-        $result = $personsController->processImport($csvContents);
+        $result = $personsController->importService->processImport($csvContents);
 
         $this->assertEquals(
             [
