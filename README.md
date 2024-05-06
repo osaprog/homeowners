@@ -3,8 +3,10 @@
 1. After cloning run composer install
 2. Rename .env.example to .env and fill the database credentials
 3. Run php artisan test (optional)
-4. Run php artisan migrate
-5. Run php artisan serve
+4. php artisan key:generate (otherwise the exception "No application encryption key has been specified" occurs)
+5. php artisan config:cache
+6. Run php artisan migrate
+7. Run php artisan serve
 
 
 php artisan test
